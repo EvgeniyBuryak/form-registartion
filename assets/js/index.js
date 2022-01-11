@@ -42,6 +42,7 @@ const COLL_MESSAGE_PROMPT = {
     'date': "Вам нет 18-ти лет!",
 };
 
+// если всё ИСТИНА отправляем форму на сервер
 const MAP_INPUTS_IS_VALIDATE = new Map([
     ['first-name', false],
     ['second-name', false],
@@ -59,7 +60,7 @@ const checkPasswordAfterSecondInput = (value) => {
     return true;
 }
 
-
+// Проверка входящих данных на корретнность
 const checkValueOnRegExp = (value, re) => {
     
     const GOOD = re.exec(value);
@@ -133,6 +134,7 @@ const removePromptForUser = (input) => {
     input.style.outlineColor = '#56bf58';
 }
 
+// если подсказка уже создана, меняем только внутреннее значение
 const changePromtForUser = (input, message) => {
 
     let KEY = input.dataset.showErrorMessage;
@@ -214,10 +216,10 @@ const validate = () => {
                 if (!isValidate) createPromptForUser(input);
                 else removePromptForUser(input);
 
-                // Дата не указана только после перезагрузки страницы, поэтому пропускаем итерацию
+                // Дата рождения не указана только после перезагрузки страницы, поэтому пропускаем итерацию
                 if (!isValidate) continue;
 
-                // Если дата не пуста и прошла первоначальную валидацию
+                // Если дата рождения не пуста и прошла первоначальную валидацию
                 // проверяем на возвраст
                 const IS_ADULT = userIsAdults(input.value);                
                                 
@@ -242,6 +244,6 @@ const validate = () => {
         isValidate = (value === false) ? false : isValidate;
     }
 
-    if (isValidate) console.log('Данные формы регистрации успешно отправлены!');
+    if (isValidate) console.log('Данные формы регистрации отправлены на сервер!');
     return isValidate;
 }
